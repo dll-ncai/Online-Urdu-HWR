@@ -1,0 +1,45 @@
+# Byte-compiled / optimized files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environments
+.venv/
+env/
+venv/
+
+# Packages
+*.egg
+*.egg-info/
+dist/
+build/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Model checkpoints / weights (NOT distributed in this repo)
+*.pt
+*.pth
+*.ckpt
+*.h5
+*.tflite
+partials/
+partials_fine_tuned/
+
+# Training outputs / experiment runs
+runs_*/
+exp_*/
+training_artifacts/
+*.log
+logs/
+
+# Datasets & feature caches (NOT distributed in this repo)
+data/
+datasets/
+*_cache/
+*_cache3/
+
+# IDE / OS
+.vscode/
+.idea/
+*.DS_Store

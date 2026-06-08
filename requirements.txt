@@ -1,0 +1,20 @@
+# Core
+torch
+torchvision
+transformers
+numpy
+pandas
+tqdm
+
+# Image / preprocessing
+opencv-python
+Pillow
+tacobox
+
+# Evaluation
+evaluate
+jiwer
+
+# Plotting / notebooks
+matplotlib
+jupyter
