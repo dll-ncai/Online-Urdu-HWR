@@ -1,0 +1,37 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite the following paper."
+title: "Online Urdu Text-Line Recognition by Bridging Stroke Dynamics and Offline Representations"
+authors:
+  - family-names: Hussain
+    given-names: Ali
+  - family-names: Ahmad
+    given-names: Rafay
+  - family-names: Moetesum
+    given-names: Momina
+  - family-names: Ul-Hasan
+    given-names: Adnan
+  - family-names: Shafait
+    given-names: Faisal
+version: 1.0.0
+license: MIT
+repository-code: "https://github.com/dll-ncai/Online-Urdu-HWR"
+preferred-citation:
+  type: conference-paper
+  title: "Online Urdu Text-Line Recognition by Bridging Stroke Dynamics and Offline Representations"
+  authors:
+    - family-names: Hussain
+      given-names: Ali
+    - family-names: Ahmad
+      given-names: Rafay
+    - family-names: Moetesum
+      given-names: Momina
+    - family-names: Ul-Hasan
+      given-names: Adnan
+    - family-names: Shafait
+      given-names: Faisal
+  collection-title: "Document Analysis and Recognition -- ICDAR 2026"
+  collection-type: proceedings
+  publisher:
+    name: Springer
+  year: 2026
+  notes: "To appear. Lecture Notes in Computer Science."
