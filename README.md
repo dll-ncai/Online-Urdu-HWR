@@ -119,4 +119,22 @@ data ordering/shuffling is identical across runs. Seeds used: `42, 123, 456, 789
 
 ## Citation
 
-If you use this code, please cite our paper. (Citation details to be added.)
+If you use this code, please cite our paper:
+
+```bibtex
+@inproceedings{hussain2026online,
+  author    = {Hussain, Ali and Ahmad, Rafay and Moetesum, Momina and
+               Ul-Hasan, Adnan and Shafait, Faisal},
+  title     = {Online Urdu Text-Line Recognition by Bridging Stroke
+               Dynamics and Offline Representations},
+  booktitle = {Document Analysis and Recognition -- ICDAR 2026},
+  series    = {Lecture Notes in Computer Science},
+  publisher = {Springer},
+  year      = {2026},
+  note      = {To appear},
+}
+```
+
+## License
+
+This project is released under the [MIT License](LICENSE).
