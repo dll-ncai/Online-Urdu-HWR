@@ -7,6 +7,8 @@ import os
 # ============================================================
 # 🔥 Fusion Modules
 # ============================================================
+
+
 def ablation_fusion(x, ablation_type):
     """
     Applies ablation over ALL channels including img_stroke.
@@ -70,6 +72,7 @@ def ablation_fusion(x, ablation_type):
 
         return x
 
+
 class ChannelFeatureAdaptiveFusion(nn.Module):
     """
     Learns per-channel per-feature weights.
@@ -91,6 +94,7 @@ class ChannelFeatureAdaptiveFusion(nn.Module):
         fused = (alpha * x).sum(dim=0)  # [B, T, D]
 
         return fused
+
 
 class DynamicAdaptiveFusion(nn.Module):
     """
@@ -130,7 +134,7 @@ class DynamicAdaptiveFusion(nn.Module):
 
         # Fuse
         fused = alpha * original_feat + (1 - alpha) * aux_feat
-        fused = (original_feat + aux_feat) / 8  # Fallback to simple average if gating fails
+        # fused = (original_feat + aux_feat) / 2  # Fallback to simple average if gating fails
         # fused = original_feat
 
         return fused
@@ -138,6 +142,7 @@ class DynamicAdaptiveFusion(nn.Module):
 # ============================================================
 # 🔥 Auxiliary Early-Branch Encoder
 # ============================================================
+
 
 class EarlyBranchAuxiliaryCNN(nn.Module):
     """
@@ -150,7 +155,8 @@ class EarlyBranchAuxiliaryCNN(nn.Module):
 
         self.in_channels = in_channels
         self.cnns = nn.ModuleList()
-        self.fusion = ChannelFeatureAdaptiveFusion(num_channels=in_channels, dim=256)
+        self.fusion = ChannelFeatureAdaptiveFusion(
+            num_channels=in_channels, dim=256)
 
         for _ in range(in_channels):
             cnn_branch = copy.deepcopy(pretrained_cnn)
@@ -172,8 +178,8 @@ class EarlyBranchAuxiliaryCNN(nn.Module):
         # x = torch.stack(branch_outputs, dim=0) # [C, B, T, D]
         # x = x.mean(dim=0) # [B, T, D]
         # branch_outputs = ablation_fusion(branch_outputs, ablation_type=ablation_type, aux_feature_names=aux_feat)
-        x = self.fusion(branch_outputs) # [B, T, D]
-        
+        x = self.fusion(branch_outputs)  # [B, T, D]
+
         return x
 
 
@@ -197,7 +203,7 @@ class FusedCNNEncoder(nn.Module):
         freeze_shared=True,
     ):
         super().__init__()
-        
+
         self.original_encoder = copy.deepcopy(pretrained_cnn)
         if freeze_shared:
             for param in self.original_encoder.parameters():
@@ -211,7 +217,7 @@ class FusedCNNEncoder(nn.Module):
         )
 
         embedding_dim = 256  # matches CNN output
-            
+
         self.fusion = DynamicAdaptiveFusion(embedding_dim)
 
     def forward(self, x):
@@ -222,7 +228,8 @@ class FusedCNNEncoder(nn.Module):
 
         shape: [B, C_total, H, W]
         """
-        x = ablation_fusion(x, ablation_type=os.getenv("ABLATION_TYPE", "none"))
+        x = ablation_fusion(
+            x, ablation_type=os.getenv("ABLATION_TYPE", "none"))
         original = x[:, 0:1]
         aux = x[:, 1:]
 
@@ -244,7 +251,7 @@ def create_fused_encoder(
     device="cpu",
     freeze_shared=True,
     fusion_type="adaptive",
-    
+
 ):
 
     pretrained = CNNEncoder().to(device)
